@@ -1,1 +1,2 @@
-# SGHC-MP-BACK
+# BackEnd-SGCO
+Back End Sistema de Gestión Clinica Odontologica
