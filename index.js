@@ -35,7 +35,7 @@ const contractPlansRouter = require('./controllers/contractPlans')
 // app.use(cors())
 
 const corsOptions = {
-  origin: 'https://sghc-mp.netlify.app', // PROD
+  origin: 'https://sghc-mp.netlify.app',
   // origin: 'http://localhost:5173', // DEV
   optionsSuccessStatus: 200
 }
