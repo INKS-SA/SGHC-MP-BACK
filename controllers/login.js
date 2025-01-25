@@ -41,7 +41,6 @@ loginRouter.post('/', validateLoginData, async (req, res, next) => {
     res.status(200).json({
       name: user.name,
       username: user.username,
-      role: user.role,
       id: user._id,
       token
     })
