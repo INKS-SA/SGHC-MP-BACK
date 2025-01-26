@@ -5,8 +5,6 @@ const cors = require('cors')
 const helmet = require('helmet')
 const app = express()
 
-app.set('trust proxy', 1);
-
 const notFound = require('./middleware/notFound')
 const handleErrors = require('./middleware/handleErrors')
 const { scheduleDailyReminders } = require('./reminderScheduler')
@@ -63,7 +61,7 @@ app.use('/uploads', cors(corsOptions), (req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
   next()
-}, express.static('uploads'))
+}, express.static('/uploads'))
 
 // Carpeta para los contratos
 app.use('/uploads/contracts', cors(corsOptions), (req, res, next) => {
@@ -79,7 +77,7 @@ app.use('/api/patients', patientsRouter)
 // Rutas para historias clínicas
 app.use('/api/medical-records', medicalRecordsRouter)
 // Rutas para login
-app.use('/api/login', loginRouter)
+app.use('/api', loginRouter)
 // Rutas para planes de tratamiento
 app.use('/api/treatment-plans', treatmentPlansRouter)
 // Rutas para cuadros de evolución
