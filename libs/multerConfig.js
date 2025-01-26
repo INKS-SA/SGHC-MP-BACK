@@ -1,13 +1,21 @@
 const multer = require('multer')
 const path = require('path')
+const fs = require('fs')
+
+const uploadPath = '/uploads/consentimientos'
+
+// Asegura que el directorio existe
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true })
+}
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/consentimientos') // Directorio donde se guardarán los archivos de consentimientos
+    cb(null, uploadPath)
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname)
-    cb(null, `${Date.now()}${ext}`) // Nombre único para el archivo basado en la fecha actual y extensión original
+    cb(null, `${Date.now()}${ext}`)
   }
 })
 
