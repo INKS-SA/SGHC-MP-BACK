@@ -51,7 +51,7 @@ contractPlansRouter.get('/download/:id', async (req, res) => {
       return res.status(404).json({ error: 'Contrato no encontrado' })
     }
 
-    const filePath = path.join(__dirname, '..', 'uploads', 'contracts', contract.contractFile)
+    const filePath = path.join(__dirname, '..', 'uploads', contract.contractFile)
     res.download(filePath)
   } catch (error) {
     res.status(500).json({ error: 'Error al descargar el contrato' })
