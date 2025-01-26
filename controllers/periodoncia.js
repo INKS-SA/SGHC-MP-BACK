@@ -1,5 +1,5 @@
 const express = require('express')
-const { body, param, validationResult } = require('express-validator')
+const { body, validationResult } = require('express-validator')
 const periodonciaRouter = express.Router()
 const Periodoncia = require('../models/Periodoncia')
 const Patient = require('../models/Patient')
@@ -14,7 +14,7 @@ periodonciaRouter.use(authMiddleware)
 // Configuración de multer para subir archivos
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/') // Carpeta donde se guardarán los archivos
+    cb(null, '/uploads') // Carpeta donde se guardarán los archivos
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname)) // Nombre único para el archivo

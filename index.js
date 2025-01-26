@@ -68,7 +68,7 @@ app.use('/uploads/contracts', cors(corsOptions), (req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
   next()
-}, express.static('uploads/contracts'))
+}, express.static('/uploads/contracts'))
 
 // Rutas para usuarios
 app.use('/api/users', usersRouter)
