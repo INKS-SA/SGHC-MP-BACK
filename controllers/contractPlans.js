@@ -10,7 +10,7 @@ contractPlansRouter.use(authMiddleware)
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, '/uploads') // Carpeta donde se guardarán los archivos
+    cb(null, '/uploads') // Guardar en la carpeta principal uploads
   },
   filename: (req, file, cb) => {
     cb(null, `contract-${Date.now()}${path.extname(file.originalname)}`)
