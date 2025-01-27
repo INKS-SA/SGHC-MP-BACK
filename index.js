@@ -65,6 +65,12 @@ app.use('/uploads', cors(corsOptions), (req, res, next) => {
   next()
 }, express.static('/uploads'))
 
+// Carpeta para los contratos
+app.use('/uploads/contracts', cors(corsOptions), (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
+  next()
+}, express.static('/uploads/contracts'))
 
 // Rutas para usuarios
 app.use('/api/users', usersRouter)
@@ -73,7 +79,7 @@ app.use('/api/patients', patientsRouter)
 // Rutas para historias clínicas
 app.use('/api/medical-records', medicalRecordsRouter)
 // Rutas para login
-app.use('/api', loginRouter)
+app.use('/api/login', loginRouter)
 // Rutas para planes de tratamiento
 app.use('/api/treatment-plans', treatmentPlansRouter)
 // Rutas para cuadros de evolución
