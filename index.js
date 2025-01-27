@@ -5,6 +5,8 @@ const cors = require('cors')
 const helmet = require('helmet')
 const app = express()
 
+app.set('trust proxy', 1);
+
 const notFound = require('./middleware/notFound')
 const handleErrors = require('./middleware/handleErrors')
 const { scheduleDailyReminders } = require('./reminderScheduler')
