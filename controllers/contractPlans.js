@@ -85,32 +85,39 @@ contractPlansRouter.post('/:treatmentId', upload.single('contractFile'), async (
   }
 })
 
-// En contractPlans.js (controller)
 contractPlansRouter.put('/:treatmentId', upload.single('contractFile'), async (req, res) => {
   try {
+    console.log('File:', req.file)
+    console.log('TreatmentId:', req.params.treatmentId)
+
+    if (!req.file) {
+      return res.status(400).json({ error: 'No se subió ningún archivo' })
+    }
+
     const treatmentId = req.params.treatmentId
     const newContractFile = req.file.filename
 
-    // Buscar contrato existente
     const existingContract = await ContractPlan.findOne({
       treatmentPlan: treatmentId
     })
 
     if (!existingContract) {
-      return res.status(404).json({
-        error: 'Contrato no encontrado'
-      })
+      return res.status(404).json({ error: 'Contrato no encontrado' })
     }
 
-    // Actualizar con nuevo archivo
     existingContract.contractFile = newContractFile
     const updatedContract = await existingContract.save()
+    console.log('Updated contract:', updatedContract)
 
-    res.json(updatedContract)
+    const contractWithFileUrl = {
+      ...updatedContract._doc,
+      contractFileUrl: `${req.protocol}://${req.get('host')}/uploads/${updatedContract.contractFile}`
+    }
+
+    res.json(contractWithFileUrl)
   } catch (error) {
-    res.status(500).json({
-      error: 'Error al actualizar el contrato'
-    })
+    console.error('Error completo:', error)
+    res.status(500).json({ error: 'Error al actualizar el contrato' })
   }
 })
 
