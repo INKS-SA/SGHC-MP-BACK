@@ -3,7 +3,7 @@ const path = require('path')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, '/uploads/consentimientos') // Directorio donde se guardarán los archivos de consentimientos
+    cb(null, '/uploads') // Directorio donde se guardarán los archivos de consentimientos
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname)

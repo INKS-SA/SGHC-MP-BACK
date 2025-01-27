@@ -60,6 +60,13 @@ contractPlansRouter.get('/download/:id', async (req, res) => {
 
 contractPlansRouter.post('/:treatmentId', upload.single('contractFile'), async (req, res) => {
   try {
+    console.log('File:', req.file)
+    console.log('TreatmentId:', req.params.treatmentId)
+
+    if (!req.file) {
+      return res.status(400).json({ error: 'No se subió ningún archivo' })
+    }
+
     const contractFile = req.file.filename
     const treatmentId = req.params.treatmentId
 
@@ -69,8 +76,11 @@ contractPlansRouter.post('/:treatmentId', upload.single('contractFile'), async (
     })
 
     const savedContract = await contract.save()
+    console.log('Saved contract:', savedContract)
+
     res.status(201).json(savedContract)
   } catch (error) {
+    console.error('Error completo:', error)
     res.status(500).json({ error: 'Error al guardar el contrato' })
   }
 })
