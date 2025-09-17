@@ -16,7 +16,7 @@ const validateBudgetData = [
   body('fases.*.procedimientos.*.nombre').isString().trim().escape().withMessage('El nombre del procedimiento es obligatorio y debe ser un texto válido'),
   body('fases.*.procedimientos.*.numeroPiezas').isInt({ gt: 0 }).withMessage('El número de piezas debe ser un entero positivo'),
   body('fases.*.procedimientos.*.costoPorUnidad').isFloat({ min: 0 }).withMessage('El costo por unidad debe ser un número positivo'),
-  body('treatmentPlan').optional().isMongoId().withMessage('El ID del plan de tratamiento debe ser un ID válido de MongoDB')
+  body('treatmentPlan').optional().customSanitizer(v => (v && typeof v === 'object' ? v._id : v)).isMongoId().withMessage('El ID del plan de tratamiento debe ser un ID válido de MongoDB')
 ]
 
 // Aplica el middleware a todas las rutas
